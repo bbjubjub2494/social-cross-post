@@ -48,7 +48,7 @@ def create_carousel_container(children, text):
     payload = {  
         'children': ','.join(children),
         'media_type': 'CAROUSEL',
-        'caption': helpers.strip_html_tags(text) + ' #midjourney #aiart #aiartcommunity #generativeai #synthography #postphotography',
+        'caption': helpers.strip_html_tags(text),
         'access_token': user_access_token  
     }  
     id = post_to_ig('media', payload)
@@ -100,7 +100,7 @@ def postInstagramSingleImage(image_url, text):
 def create_item_container_single_image(image_url, text):
     payload = {
         'image_url': image_url,
-        'caption': helpers.strip_html_tags(text) + ' #midjourney #aiart #aiartcommunity #generativeai #synthography #postphotography',
+        'caption': helpers.strip_html_tags(text),
         'access_token': user_access_token
     }
     id = post_to_ig('media', payload)
@@ -113,7 +113,7 @@ def create_item_container_single_image(image_url, text):
 def publish_single_image_container(creation_id, text):
     payload = {
         'creation_id': creation_id,
-        'caption': helpers.strip_html_tags(text) + ' #midjourney #aiart #aiartcommunity #generativeai #synthography #postphotography',
+        'caption': helpers.strip_html_tags(text),
         'access_token': user_access_token
     }
     id = post_to_ig('media_publish', payload)

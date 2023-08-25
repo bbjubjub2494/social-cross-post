@@ -111,8 +111,6 @@ def submit_form():
     # Check if any images have been selected and if any of them have alt text
     files = request.files.getlist('files')
     alt_texts = [request.form.get('alt_text_' + str(i)) for i in range(len(files))]
-    if files and any(alt_texts):
-        text += '\n\n[prompt in the alt]'
 
     if hashtag == 'on':  # if checkbox is checked, append hashtag_text
         text += '\n\n' + hashtag_text

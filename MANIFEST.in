@@ -1,0 +1,2 @@
+recursive-include social_cross_post/templates *
+recursive-include social_cross_post/static *

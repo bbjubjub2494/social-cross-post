@@ -1,5 +1,6 @@
 from tweepy import Client
 import json
+import os.path
 import requests
 from . import helpers
 from requests_oauthlib import OAuth1
@@ -33,9 +34,7 @@ def upload_to_twitter(image_locations, alt_texts, text):
         if image_locations:
             media_ids = []
             for image_location, alt_text in zip(image_locations, alt_texts):
-                # Parse the URL and get the path
-                url_parts = urlparse(image_location)
-                local_file_path = url_parts.path[1:]  # Remove the leading '/'
+                local_file_path = os.path.join("/tmp/social-cross-post", image_location)
 
                 # Get media id
                 media_id = upload_local_image(local_file_path, twitter_config, alt_text)

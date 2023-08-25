@@ -4,6 +4,7 @@ from atproto import Client, models
 from datetime import datetime
 from .config import (BLUESKY_EMAIL, BLUESKY_PASSWORD)
 from urllib.parse import urlparse
+import os.path
 
 logger, speed_logger = configLog.configure_logging()
 
@@ -32,9 +33,7 @@ def post_to_bluesky(text, image_locations, alt_texts):
     images = []
     for idx, image_location in enumerate(image_locations):
         try:
-            # Parse the URL and get the path
-            url_parts = urlparse(image_location)
-            local_file_path = url_parts.path[1:]  # Remove the leading '/'
+            local_file_path = os.path.join("/tmp/social-cross-post", image_location)
 
             # Debug: log the current file path
             logger.debug(f"Processing image file: {local_file_path}")

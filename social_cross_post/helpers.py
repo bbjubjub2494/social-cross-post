@@ -155,19 +155,16 @@ def send_post(post_data):
     log_and_flash_messages(post_data, success_messages, error_messages)
     
     # New code to delete the temporary folder after posting images
-    for image_location in post_data['image_locations']:
-        # Parse the URL to get the path
-        url_path = urllib.parse.urlparse(image_location).path
-        # Remove the initial slash if there is one
-        if url_path.startswith('/'):
-            url_path = url_path[1:]
+    for image_path in post_data['image_locations']:
         # Join the path to get the absolute path of the local directory
-        dir_path = os.path.join(os.getcwd(), url_path)
+        dir_path = os.path.join("/tmp/social-cross-post", image_path)
         # Get the parent directory of the image file
         parent_dir = os.path.dirname(dir_path)
+        # TODO make sure no accidents
+        print(parent_dir)
         # Remove the directory
-        if os.path.exists(parent_dir) and os.path.isdir(parent_dir):
-            shutil.rmtree(parent_dir)
+        #if os.path.exists(parent_dir) and os.path.isdir(parent_dir):
+        #    shutil.rmtree(parent_dir)
 
 def create_subject(text):
     now = datetime.now()

@@ -2,6 +2,7 @@ from mastodon import Mastodon
 from . import configLog
 from urllib.parse import urlparse
 from .config import (MASTODON_ACCESS_TOKEN, MASTODON_API_BASE_URL)
+import os.path
 
 logger, speed_logger = configLog.configure_logging()
 
@@ -14,9 +15,7 @@ def post_to_mastodon(subject, body, image_locations, alt_texts):
     media_ids = []
     for idx, image_location in enumerate(image_locations):
         try:
-            # Parse the URL and get the path
-            url_parts = urlparse(image_location)
-            local_file_path = url_parts.path[1:]  # Remove the leading '/'
+            local_file_path = os.path.join("/tmp/social-cross-post", image_location)
 
             # Open the image file from its location
             with open(local_file_path, "rb") as image_file:

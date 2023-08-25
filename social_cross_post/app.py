@@ -8,7 +8,7 @@ from datetime import datetime
 # Third-Party Libraries
 import pytz
 from PIL import Image
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, send_from_directory, url_for, flash, session
 from flask_session import Session  # if you're using flask-session
 from flask_apscheduler import APScheduler
 from flask_sqlalchemy import SQLAlchemy
@@ -263,12 +263,9 @@ def process_files(files, alt_texts, scheduled_time):
             image.save(temp_file_path, 'JPEG', quality=90)
             logger.info('Saved processed image: %s', temp_file_path)
 
-            #if scheduled_time:
-            image_url = url_for('static', filename=f'temp/{folder_name}/{filename}', _external=True)
-            #else:
-            #    image_url = url_for('static', filename=f'temp/{filename}', _external=True)
-            image_locations.append(image_url)
-            logger.info('Appended image URL: %s', image_url)
+            image_path = f'{folder_name}/{filename}'
+            image_locations.append(image_path)
+            logger.info('Appended image path: %s', image_path)
 
             with open(temp_file_path, 'rb') as img_file:
                 processed_files.append((temp_file_path, helpers.resize_image(img_file)))
@@ -280,6 +277,10 @@ def process_files(files, alt_texts, scheduled_time):
             raise
 
     return processed_files, processed_alt_texts, image_locations
+
+@app.get('/static/temp/<path:path>')
+def static_temp(path):
+    return send_from_directory('/tmp/social-cross-post', path)
 
 
 

@@ -2,9 +2,9 @@ import requests
 import json
 import uuid
 from typing import List, Optional
-from config import (FB_ACCESS_TOKEN, FB_PAGE_ID)
+from .config import (FB_ACCESS_TOKEN, FB_PAGE_ID)
 from concurrent.futures import ThreadPoolExecutor
-import configLog
+from . import configLog
 
 logger, speed_logger = configLog.configure_logging()
 

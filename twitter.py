@@ -1,15 +1,15 @@
 from tweepy import Client
 import json
 import requests
-import helpers
+from . import helpers
 from requests_oauthlib import OAuth1
 from urllib.parse import urlparse
-import configLog
+from . import configLog
 
 logger, speed_logger = configLog.configure_logging()
 
 # Load Twitter credentials from config.json
-with open("config.json", "r") as file:
+with open("/run/agenix/social-cross-post/config.json", "r") as file:
     twitter_config = json.load(file)
 
 # OAuth1 authentication

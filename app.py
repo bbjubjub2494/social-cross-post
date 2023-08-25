@@ -18,15 +18,15 @@ from sqlalchemy import inspect
 #from apscheduler.triggers.date import DateTrigger
 
 # Your Applications/Library specific modules
-import helpers
-from config import Config, MYPASSWORD
-from models import ScheduledPosts
-from extensions import db
-from config import Config
-import configLog
+from . import helpers
+from .config import Config, MYPASSWORD
+from .models import ScheduledPosts
+from .extensions import db
+from .config import Config
+from . import configLog
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, instance_path="/var/lib/social-cross-post")
     app.config.from_object(Config)
     
     # Initialize db with app
@@ -242,7 +242,7 @@ def process_files(files, alt_texts, scheduled_time):
     processed_files = []
     processed_alt_texts = []
     image_locations = []
-    temp_dir = os.path.join(app.root_path, 'static/temp')
+    temp_dir = "/tmp/social-cross-post"
 
     if scheduled_time:
         # Create a subfolder based on the scheduled time

@@ -1,4 +1,4 @@
-from app import app, ScheduledPosts
+from .app import app, ScheduledPosts
 
 def get_all_scheduled_posts():
     with app.app_context():

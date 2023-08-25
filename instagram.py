@@ -1,10 +1,10 @@
 import logging
 import requests
 import json
-import helpers
-from config import (INSTAGRAM_USER_ID, USER_ACCESS_TOKEN)
+from . import helpers
+from .config import (INSTAGRAM_USER_ID, USER_ACCESS_TOKEN)
 from concurrent.futures import ThreadPoolExecutor
-import configLog
+from . import configLog
 
 logger, speed_logger = configLog.configure_logging()
 

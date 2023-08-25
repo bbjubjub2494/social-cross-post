@@ -15,17 +15,10 @@ from flask import url_for, flash
 import urllib.parse
 
 # Local application/library specific imports
-import posthaven
-import bluesky
-import instagram
-import masto
-import twitter
-import facebook
-import configLog
-from extensions import db
-from models import ScheduledPosts
+from . import posthaven, bluesky, instagram, masto, twitter, facebook, configLog
+from .extensions import db
+from .models import ScheduledPosts
 
-from app import flask_app
 
 URL_PATTERN = re.compile(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
 
@@ -220,6 +213,7 @@ def save_post_to_database(post_data):
 
 
 def send_scheduled_post(post_id):
+    from .app import flask_app
     logger.debug('send_scheduled_post function triggered')
 
     with flask_app.app_context():
@@ -264,7 +258,7 @@ def timed_execution(function, *args, **kwargs):
     return end - start, result
 
 def create_temp_dir(app, scheduled_time):
-    temp_dir = os.path.join(app.root_path, 'static/temp')
+    temp_dir = "/tmp/social-cross-post"
 
     # If scheduled_time is not provided, use the current time
     if not scheduled_time:

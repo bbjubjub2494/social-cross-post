@@ -1,8 +1,8 @@
-import helpers
-import configLog
+from . import helpers
+from . import configLog
 from atproto import Client, models
 from datetime import datetime
-from config import (BLUESKY_EMAIL, BLUESKY_PASSWORD)
+from .config import (BLUESKY_EMAIL, BLUESKY_PASSWORD)
 from urllib.parse import urlparse
 
 logger, speed_logger = configLog.configure_logging()

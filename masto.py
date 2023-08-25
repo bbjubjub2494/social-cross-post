@@ -1,7 +1,7 @@
 from mastodon import Mastodon
-import configLog
+from . import configLog
 from urllib.parse import urlparse
-from config import (MASTODON_ACCESS_TOKEN, MASTODON_API_BASE_URL)
+from .config import (MASTODON_ACCESS_TOKEN, MASTODON_API_BASE_URL)
 
 logger, speed_logger = configLog.configure_logging()
 

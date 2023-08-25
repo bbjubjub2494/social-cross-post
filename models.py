@@ -1,5 +1,5 @@
 # models.py
-from extensions import db
+from .extensions import db
 
 class ScheduledPosts(db.Model):
     id = db.Column(db.Integer, primary_key=True)

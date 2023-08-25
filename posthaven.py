@@ -3,8 +3,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-import configLog
-from config import (FASTMAIL_USERNAME, FASTMAIL_PASSWORD, EMAIL_RECIPIENTS)
+from . import configLog
+from .config import (FASTMAIL_USERNAME, FASTMAIL_PASSWORD, EMAIL_RECIPIENTS)
 from urllib.parse import urlparse
 
 logger, speed_logger = configLog.configure_logging()

@@ -15,5 +15,3 @@ class Config(object):
         'default': SQLAlchemyJobStore(url='sqlite:////var/lib/social-cross-post/jobs.db')
     }
     SCHEDULER_API_ENABLED = True
-
-MYPASSWORD = "vajoco"

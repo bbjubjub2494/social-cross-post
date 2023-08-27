@@ -31,7 +31,8 @@ def post_to_ig(endpoint, payload):
     return id  # return the id if the request was successful
 
 
-def create_item_container(image_url):
+def create_item_container(image_path):
+    image_url = url_for('static', filename=image_path, _external=True)
     payload = {
         'image_url': image_url,  
         'is_carousel_item': True,  
@@ -77,7 +78,7 @@ def postInstagramCarousel(image_locations, text):
     # Create a ThreadPoolExecutor
     with ThreadPoolExecutor() as executor:
         # Submit tasks to the executor
-        futures = {executor.submit(create_item_container, image_url) for image_url in image_locations}
+        futures = {executor.submit(create_item_container, image_path) for image_path in image_locations}
         # Gather the results as they become available
         children = [future.result() for future in futures if future.result() is not None]
 
@@ -89,15 +90,16 @@ def postInstagramCarousel(image_locations, text):
     return False  # return False if the operation failed
 
 
-def postInstagramSingleImage(image_url, text):
-    logger.info('postInstagramSingleImage function called with image URL: %s and text: %s', image_url, text)
-    media_id = create_item_container_single_image(image_url, text)
+def postInstagramSingleImage(image_path, text):
+    logger.info('postInstagramSingleImage function called with image URL: %s and text: %s', image_path, text)
+    media_id = create_item_container_single_image(image_path, text)
     if media_id:
         return publish_single_image_container(media_id, text)
     return False  # return False if the operation failed
 
 
-def create_item_container_single_image(image_url, text):
+def create_item_container_single_image(image_path, text):
+    image_url = url_for('static', filename=image_path, _external=True)
     payload = {
         'image_url': image_url,
         'caption': helpers.strip_html_tags(text),

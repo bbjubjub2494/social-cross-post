@@ -15,7 +15,7 @@ from flask import url_for, flash
 import urllib.parse
 
 # Local application/library specific imports
-from . import posthaven, bluesky, instagram, masto, twitter, facebook, configLog
+from . import posthaven, bluesky, warpcast, instagram, masto, twitter, facebook, configLog
 from .extensions import db
 from .models import ScheduledPosts
 
@@ -136,6 +136,7 @@ def send_post(post_data):
         'Twitter': (twitter.upload_to_twitter, [post_data['image_locations'], post_data['processed_alt_texts'], post_data['text_mastodon']]),
         'Mastodon': (masto.post_to_mastodon, [post_data['subject'], post_data['text_mastodon'], post_data['image_locations'], post_data['processed_alt_texts']]),
         'Bluesky': (bluesky.post_to_bluesky, [post_data['text_mastodon'], post_data['image_locations'], post_data['processed_alt_texts']]),
+        'Warpcast': (warpcast.post_to_warpcast, [post_data['text_mastodon'], post_data['image_locations'], post_data['processed_alt_texts']]),
         'Posthaven': (posthaven.send_email_with_attachments, [post_data['subject'], post_data['text'], post_data['image_locations'], post_data['processed_alt_texts']]),
         'Facebook': (facebook.post_to_facebook, [post_data['image_locations'], post_data['text_mastodon'], post_data['processed_alt_texts']]),
         'Instagram': (instagram.postInstagramCarousel, [post_data['image_locations'], post_data['text']]),

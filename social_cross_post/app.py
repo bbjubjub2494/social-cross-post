@@ -174,6 +174,7 @@ def submit_form():
     enable_instagram = request.form.get('chkIG') == 'on'
     enable_posthaven = request.form.get('chkPH') == 'on'
     enable_bluesky = request.form.get('chkBS') == 'on'
+    enable_warpcast = request.form.get('chkWC') == 'on'
     enable_mastodon = request.form.get('chkMS') == 'on'
     enable_facebook = request.form.get('chkFB') == 'on'
 
@@ -189,6 +190,7 @@ def submit_form():
         "enable_instagram": enable_instagram,
         "enable_posthaven": enable_posthaven,
         "enable_bluesky": enable_bluesky,
+        "enable_warpcast": enable_warpcast,
         "enable_mastodon": enable_mastodon,
         "enable_facebook": enable_facebook,
         "processed_files": processed_files,

@@ -3,6 +3,7 @@
   fetchPypi,
   poetry-core,
   setuptools,
+  setuptools-scm,
   typing-validation,
   typing-extensions,
   buildPythonPackage,
@@ -16,6 +17,8 @@ buildPythonPackage rec {
     inherit pname version;
     hash = "sha256-sJmeFHJbWb/ziXSwDpGGKeDinz2ApA4CLG8PjVzf+dQ=";
   };
+
+  nativeBuildInputs = [ setuptools-scm ];
 
   propagatedBuildInputs = [
     poetry-core

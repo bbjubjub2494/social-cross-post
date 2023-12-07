@@ -14,6 +14,7 @@ buildPythonPackage {
   pname = "social-cross-post";
   version = "1.0-unstable";
   src = ../..;
+  format = "pyproject";
 
   propagatedBuildInputs = [
     pytz

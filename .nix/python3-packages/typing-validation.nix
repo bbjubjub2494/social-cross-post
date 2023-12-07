@@ -4,6 +4,7 @@
   buildPythonPackage,
   poetry-core,
   setuptools,
+  setuptools-scm,
 }:
 buildPythonPackage rec {
   pname = "typing-validation";
@@ -18,6 +19,8 @@ buildPythonPackage rec {
   postPatch = ''
     sed -i '/\s*multiformats/d' setup.cfg # break circular dependency
   '';
+
+  nativeBuildInputs = [ setuptools-scm ];
 
   propagatedBuildInputs = [
     poetry-core
